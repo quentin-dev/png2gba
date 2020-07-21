@@ -1,19 +1,17 @@
 .PHONY : clean all
-.DEFAULT_GOAL := all
 
-CC=gcc
-FLAGS=-g -W -Wall
-TARGET=png2gba
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -D_GNU_SOURCE
+
+LDFLAGS = -lpng
+
+OBJS = png2gba.o
+TARGET = png2gba
  
-# do everything (default, for linux)
 all: $(TARGET)
-	@echo "All done!"
 
-# link it all together
-$(TARGET): png2gba.c
-	$(CC) $(FLAGS) -o $(TARGET) png2gba.c -lpng -largp
+$(TARGET): $(OBJS)
 
-# tidy up
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJS)
 
