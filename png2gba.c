@@ -423,7 +423,7 @@ void png2gba(FILE *in, FILE *out, char *name, int palette,
     if (palette)
     {
         int colors_this_line = 0;
-        fprintf(out, "extern const unsigned short %s_palette [] = {\n", name);
+        fprintf(out, "const unsigned short %s_palette [] __attribute__((aligned(4))) __attribute__((visibility(\"hidden\")))= {\n", name);
         int i;
         for (i = 0; i < PALETTE_SIZE; i++)
         {
