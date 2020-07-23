@@ -350,11 +350,11 @@ void png2gba(FILE *in, FILE *out, char *name, int palette,
     fprintf(out, "#define %s_height %d\n\n", name, image->h);
     if (palette)
     {
-        fprintf(out, "extern const unsigned char %s_data [] = {\n", name);
+        fprintf(out, "const unsigned char %s_data [] __attribute__((aligned(4))) __attribute__((visibility(\"hidden\")))= {\n", name);
     }
     else
     {
-        fprintf(out, "extern const unsigned short %s_data [] = {\n", name);
+        fprintf(out, "const unsigned short %s_data []  __attribute__((aligned(4))) __attribute__((visibility(\"hidden\")))= {\n", name);
     }
 
     /* the palette stores up to PALETTE_SIZE colors */
